@@ -1,0 +1,25 @@
+DESAFIO:
+Uma antiga loja de vinhos gostaria de vender seus produtos também pela internet para aumentar o seu faturamento, com isso, o seu objetivo é desenvolver um pequeno e-commerce web que contemple os seguintes requisitos funcionais:
+1) Cadastro de vinho com as informações de nome, tipo do vinho e peso;
+2) Registrar uma venda, considerando as seguintes situações:
+3) Cliente gostaria de selecionar um ou mais produtos e a quantidade desejada;
+4) Informa a distancia para entrega (ex: 250km)
+5) Ao fechar o pedido, deve ser informado o total geral da venda, considerando o frete.
+Fórmula para o cálculo do frete:
+1) Para cada 1 kilo do total do pedido, considerar R$5 no calculo do frente;
+2) Distancias até 100km considerar somente valor calculado do peso do pedido, distancias maiores que 100km considerar valor calculado do peso do pedido vezes distancia da entrega divido por 100.
+Não é necessário controlar o estoque dos produtos;
+Requisitos
+1) Ter a camada de frontend totalmente desacoplada do backend;
+2) Utilizar o conceito REST, podendo utilizar qualquer framework Java que atenda o mesmo.
+3) O sistema deve ser desenvolvido com backend/framework JAVA de sua preferência.
+4) Utilizar o Maven ou similar para montagem e controle de dependências.
+5) Utilizar alguma implementação de JPA (Hibernate, EclipseLink, etc);
+6) Testes unitários;
+7) Deploy em um servlet container, sem exigir que o projeto seja rodado por dentro do eclipse;
+Entrega do desafio:
+1) Enviar projeto compactado em formato zip;
+2) Informar requisitos necessários para o funcionamento da aplicação (ex: servidor web, banco de dados, etc);
+3) Informar configurações necessárias para o funcionamento da aplicação (ex: criação de banco, definição de senha de acesso ao banco, etc);"
+4) Informar em um descritivo, a explicação (arquitetura) da aplicação desenvolvida, o que motivou a escolha de cada API/framework/lib no projeto e diferenciais que queira detalhar.
+OBS: Alguns detalhes de negócio não foram detalhados ou mesmo podem haver alguns pontos estranho, que ficaram assim para que você analise e faça mudanças naquilo que entender como melhor.
