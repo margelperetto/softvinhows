@@ -19,37 +19,37 @@ public class GrizzlyTest {
 
 	private Client c;
 	protected WebTarget target;
-	
+
 	private HttpServer server;
 	private String BASE_URI;
 	private static int port= 8081;
 
 	private HttpServer startGrizzlyServer() throws Exception{
-		
+
 		Db.PERSISTENCE_UNIT = Db.H2_UNIT;
 
 		ResourceConfig rc = new ResourceConfig()
 				.packages("br.com.margel.softvinhows");
-		
+
 		URI u = URI.create(BASE_URI = "http://localhost:"+(port++)+"/softvinho_test/");
-		
+
 		String path = u.getPath();
-	    path = String.format("/%s", UriComponent.decodePath(u.getPath(), true)
-	                 .get(1).toString());
+		path = String.format("/%s", UriComponent.decodePath(u.getPath(), true)
+				.get(1).toString());
 
-	    WebappContext context = new WebappContext("GrizzlyContext", path);
-	    context.addListener(DeployListener.class);
-	    
-	    Servlet servlet = new ServletContainer(rc);
-	    
-	    ServletRegistration registration = context.addServlet(servlet.getClass().getName(), servlet);
-	    registration.addMapping("/*");
+		WebappContext context = new WebappContext("GrizzlyContext", path);
+		context.addListener(DeployListener.class);
 
-	    HttpServer server = GrizzlyHttpServerFactory.createHttpServer(u);
-	    context.deploy(server);
-	    return server;
+		Servlet servlet = new ServletContainer(rc);
+
+		ServletRegistration registration = context.addServlet(servlet.getClass().getName(), servlet);
+		registration.addMapping("/*");
+
+		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(u);
+		context.deploy(server);
+		return server;
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		server = startGrizzlyServer();
@@ -62,5 +62,5 @@ public class GrizzlyTest {
 		c.close();
 		server.shutdownNow();
 	}
-	
+
 }
