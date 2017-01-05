@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -26,6 +25,9 @@ public class ItemVenda extends BasicBean{
 	
 	@Column(name="total_item",nullable=false)
 	private BigDecimal totalItem;
+	
+	@Column(name="peso_vinho",nullable=false)
+	private BigDecimal pesoVinho;
 
 	public Vinho getVinho() {
 		return vinho;
@@ -65,6 +67,14 @@ public class ItemVenda extends BasicBean{
 
 	public void setVenda(Venda venda) {
 		this.venda = venda;
+	}
+
+	public BigDecimal getPesoVinho() {
+		return pesoVinho;
+	}
+
+	public void setPesoVinho(BigDecimal pesoVinho) {
+		this.pesoVinho = pesoVinho;
 	}
 	
 	@Override

@@ -28,10 +28,11 @@ public class Vinho extends BasicBean{
 		
 	}
 	
-	public Vinho(String nome,BigDecimal peso, BigDecimal precoSugerido) {
+	public Vinho(String nome,BigDecimal peso, BigDecimal precoSugerido, Tipo tipo) {
 		this.nome = nome;
 		this.peso = peso;
 		this.precoSugerido = precoSugerido;
+		this.tipo = tipo;
 	}
 
 	public String getNome() {

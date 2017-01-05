@@ -22,6 +22,9 @@ public class Venda extends BasicBean{
 	@Column
 	private BigDecimal distancia;
 	
+	@Column(name="peso_total")
+	private BigDecimal pesoTotal;
+	
 	@Column(name="total_itens")
 	private BigDecimal totalItens;
 	
@@ -83,8 +86,25 @@ public class Venda extends BasicBean{
 		this.itens = itens;
 	}
 	
+	public BigDecimal getTotalGeral() {
+		return totalGeral;
+	}
+	
+	public void setTotalGeral(BigDecimal totalGeral) {
+		this.totalGeral = totalGeral;
+	}
+
+	public BigDecimal getPesoTotal() {
+		return pesoTotal;
+	}
+
+	public void setPesoTotal(BigDecimal pesoTotal) {
+		this.pesoTotal = pesoTotal;
+	}
+	
 	@Override
 	public String toString() {
-		return getId()+(totalGeral==null?"":" : "+totalGeral)+" - "+cliente;
+		return getId()+(getTotalGeral()==null?"":" : "+getTotalGeral())+" - "+cliente;
 	}
+	
 }

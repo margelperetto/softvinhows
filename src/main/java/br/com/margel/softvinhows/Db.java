@@ -5,14 +5,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Db {
+	
+	public static String MYSQL_UNIT = "mysql";
+	public static String H2_UNIT = "h2_memoria";
+	
+	public static String PERSISTENCE_UNIT = MYSQL_UNIT;
+	
 	private static EntityManagerFactory factory;
 	private static ThreadLocal<EntityManager> tr = new ThreadLocal<>();
 	
 	public static void createFactory(){
-		if(factory == null){
-			factory = Persistence.createEntityManagerFactory("mysql");
-			System.out.println("Factory criado!");
-		}
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+		System.out.println("Factory criado para a unidade  de persistência: "+PERSISTENCE_UNIT);
 	}
 	
 	public static void closeFactory(){

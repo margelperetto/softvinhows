@@ -24,6 +24,7 @@ public class BasicBeanResource<T extends BasicBean> {
 	
 	public BasicBeanResource(Class<T> clazz){
 		this.clazz = clazz;
+		System.out.println("ACESSO AO RECURSO PARA "+clazz.getSimpleName());
 	}
 
 	@PUT
@@ -31,7 +32,7 @@ public class BasicBeanResource<T extends BasicBean> {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("save")
 	public T save( T obj) {
-		System.out.println("SALVANDO T "+obj);
+		System.out.println("SALVANDO "+obj);
 		if(obj.getId()>0){
 			Db.em().merge(obj);
 		}else{
@@ -44,7 +45,7 @@ public class BasicBeanResource<T extends BasicBean> {
 	@Path("delete/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public boolean delete(@PathParam("id") long id) {
-		System.out.println("REMOVENDO T ID: "+id);
+		System.out.println("REMOVENDO ID: "+id);
 		T T = Db.em().find(clazz, id);
 		if(T==null){
 			return false;
@@ -57,14 +58,14 @@ public class BasicBeanResource<T extends BasicBean> {
 	@Path("get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public T get(@PathParam("id") long id) {
-		System.out.println("BUSCANDO T ID: "+id);
+		System.out.println("BUSCANDO ID: "+id);
 		return Db.em().find(clazz, id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<T> listAll() {
-		System.out.println("LISTANDO TODOS OS TS");
+		System.out.println("LISTANDO TODOS");
 		CriteriaBuilder builder = Db.em().getCriteriaBuilder();
 
 		CriteriaQuery<T> query = builder.createQuery(clazz);
