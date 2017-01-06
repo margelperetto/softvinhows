@@ -9,5 +9,5 @@ public class VinhoResource extends BasicBeanResource<Vinho> {
 	public VinhoResource() {
 		super(Vinho.class);
 	}
-
+	
 }

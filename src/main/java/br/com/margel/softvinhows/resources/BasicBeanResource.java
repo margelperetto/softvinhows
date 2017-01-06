@@ -59,7 +59,8 @@ public class BasicBeanResource<T extends BasicBean> {
 	@Produces(MediaType.APPLICATION_JSON)
 	public T get(@PathParam("id") long id) {
 		System.out.println("BUSCANDO ID: "+id);
-		return Db.em().find(clazz, id);
+		T obj = Db.em().find(clazz, id);
+		return obj;
 	}
 
 	@GET

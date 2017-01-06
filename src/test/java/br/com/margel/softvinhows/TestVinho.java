@@ -26,10 +26,10 @@ public class TestVinho extends AbstractBasicBeanTest<Vinho>{
 	protected void executeAllAssertsExceptId(Vinho obj, Vinho other) {
 		assertEquals(obj.getNome(), other.getNome());
 		assertEquals(obj.getTipo(), other.getTipo());
-//		assertEquals(obj.getPeso(), other.getPeso());
-//		assertEquals(obj.getPrecoSugerido(), other.getPrecoSugerido());
+		assertEquals(obj.getPeso(), other.getPeso());
+		assertEquals(obj.getPrecoSugerido(), other.getPrecoSugerido());
 	}
-
+	
 	@Override
 	protected Class<Vinho> clazz() {
 		return Vinho.class;

@@ -18,7 +18,7 @@ public class Vinho extends BasicBean{
 	@Enumerated(EnumType.STRING)
 	private Tipo tipo;
 	
-	@Column(nullable=false)
+	@Column(nullable=false,precision=10, scale=3)
 	private BigDecimal peso;
 	
 	@Column(name="preco_sugerido")
@@ -82,9 +82,12 @@ public class Vinho extends BasicBean{
 			return descricao;
 		}
 	}
-	
+
 	@Override
 	public String toString() {
-		return getId()+" - "+nome;
+		return "Vinho [nome=" + nome + ", tipo=" + tipo + ", peso=" + peso + ", precoSugerido=" + precoSugerido
+				+ ", getId()=" + getId() + "]";
 	}
+	
+	
 }
