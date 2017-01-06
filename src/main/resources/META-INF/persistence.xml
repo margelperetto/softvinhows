@@ -12,6 +12,7 @@
 			<property name="javax.persistence.jdbc.password" value="123" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.default_schema" value="teste"/>
 		</properties>
 	</persistence-unit>
 	
