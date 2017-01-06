@@ -6,10 +6,10 @@ import javax.persistence.Persistence;
 
 public class Db {
 	
-	public static String MYSQL_UNIT = "mysql";
+	public static String POSTGRESQL_UNIT = "postgresql";
 	public static String H2_UNIT = "h2_memoria";
 	
-	public static String PERSISTENCE_UNIT = MYSQL_UNIT;
+	public static String PERSISTENCE_UNIT = POSTGRESQL_UNIT;
 	
 	private static EntityManagerFactory factory;
 	private static ThreadLocal<EntityManager> tr = new ThreadLocal<>();
