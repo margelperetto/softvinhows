@@ -1,32 +1,48 @@
 package br.com.margel.softvinhows;
 
 import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
-import javax.ws.rs.client.Entity;
-import org.junit.Test;
+import java.util.List;
+
+import javax.ws.rs.core.GenericType;
+
 import br.com.margel.softvinhows.models.Vinho;
 import br.com.margel.softvinhows.models.Vinho.Tipo;
 
-public class TestVinho extends GrizzlyTest{
+public class TestVinho extends AbstractBasicBeanTest<Vinho>{
 
-	@Test
-	public void testAddVinho() {
-		System.out.println("TESTANDO ADD DE VINHO");
-
-		Vinho vinho = new Vinho(
-				"Vinho teste", 
+	@Override
+	protected Vinho createTestInstanceWithoutId(int seq) {
+		return new Vinho(
+				"Vinho teste "+seq, 
 				new BigDecimal("0.575"), 
 				new BigDecimal("45.99"), 
 				Tipo.TINTO
 				);
-
-		Vinho resposta = target.path("vinho/save")
-				.request()
-				.put(Entity.json(vinho),Vinho.class);
-
-		assertEquals(resposta.getId(), 1);
-
-		System.out.println("ADD DE VINHO OK!");
 	}
 
+	@Override
+	protected void executeAllAssertsExceptId(Vinho obj, Vinho other) {
+		assertEquals(obj.getNome(), other.getNome());
+		assertEquals(obj.getTipo(), other.getTipo());
+//		assertEquals(obj.getPeso(), other.getPeso());
+//		assertEquals(obj.getPrecoSugerido(), other.getPrecoSugerido());
+	}
+
+	@Override
+	protected Class<Vinho> clazz() {
+		return Vinho.class;
+	}
+
+	@Override
+	protected String path() {
+		return "vinho";
+	}
+
+	@Override
+	protected GenericType<List<Vinho>> genericTypeListInstance() {
+		return new GenericType<List<Vinho>>(){};
+	}
+	
 }
