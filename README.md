@@ -1,11 +1,11 @@
 # softvinhows
-Back-end REST loja de vinhos
+Back-end REST loja de vinhos <br>
 
-Framework REST: Jersey
-Controle de dependências: Maven
-Banco de dados utilizado: PostgreSQL 9.5
-servlet container: Apache Tomcat 8
-JPA: Hibernate
+Framework REST: Jersey <br>
+Controle de dependências: Maven <br>
+Banco de dados utilizado: PostgreSQL 9.5 <br>
+servlet container: Apache Tomcat 8 <br>
+JPA: Hibernate <br>
 
 Requisitos do banco de dados(PostgreSQL 9.5): 
   - nome do banco: softvinho
