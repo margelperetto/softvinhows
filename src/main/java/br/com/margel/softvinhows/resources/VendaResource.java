@@ -54,7 +54,6 @@ public class VendaResource extends BasicBeanResource<Venda>{
 		if(venda==null){
 			return null;
 		}
-		System.out.println("RESULTADO DO GET: "+venda);
 		venda.setItens(listItens(venda.getId()));
 		return venda;
 	}
@@ -99,7 +98,7 @@ public class VendaResource extends BasicBeanResource<Venda>{
 		for(ItemVenda i : v.getItens()){
 			validarItemCalcularTotal(i);
 			totalItens = totalItens.add(i.getTotalItem());
-			pesoTotal = pesoTotal.add(i.getPesoVinho());
+			pesoTotal = pesoTotal.add(i.getPesoTotalItem());
 		}
 		if(v.getTotalFrete()==null){
 			v.setTotalFrete(calcularTotalFrete(v.getDistancia(), pesoTotal));
@@ -124,6 +123,7 @@ public class VendaResource extends BasicBeanResource<Venda>{
 			throw badRequest("Valor unitário não informado para o vinho '"+i.getVinho()+"' !");
 		}
 		i.setTotalItem(i.getQuantidade().multiply(i.getValorUnitario()));
+		i.setPesoTotalItem(i.getQuantidade().multiply(i.getPesoVinho()));
 	}
 	
 	
@@ -150,7 +150,7 @@ public class VendaResource extends BasicBeanResource<Venda>{
 			if(distancia.compareTo(cem)>0){
 				return fretePorPeso.multiply(distancia).divide(cem,2,RoundingMode.DOWN);
 			}else{
-				return fretePorPeso;
+				return fretePorPeso.setScale(2, RoundingMode.DOWN);
 			}
 		}
 	}

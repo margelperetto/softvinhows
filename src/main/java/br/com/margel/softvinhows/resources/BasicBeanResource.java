@@ -22,6 +22,9 @@ public class BasicBeanResource<T extends BasicBean> {
 	
 	private Class<T> clazz;
 	
+	/* Uma lib de log seria bem melhor que sysout, mas to cheio de visita querendo atenção nesse fim de ano 
+	 * e to meio sem tempo pra implementar :) */
+	
 	public BasicBeanResource(Class<T> clazz){
 		this.clazz = clazz;
 		System.out.println("ACESSO AO RECURSO PARA "+clazz.getSimpleName());

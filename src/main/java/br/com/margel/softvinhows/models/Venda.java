@@ -36,8 +36,16 @@ public class Venda extends BasicBean{
 	
 	@Transient
 	private List<ItemVenda> itens;
-
 	
+	public Venda() {
+	}
+
+	public Venda(Cliente cliente, BigDecimal distancia, List<ItemVenda> itens) {
+		this.cliente = cliente;
+		this.distancia = distancia;
+		this.itens = itens;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}

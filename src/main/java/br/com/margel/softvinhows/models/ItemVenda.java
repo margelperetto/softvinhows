@@ -35,6 +35,18 @@ public class ItemVenda extends BasicBean{
 	
 	@Column(name="peso_vinho",nullable=false,precision=10, scale=3)
 	private BigDecimal pesoVinho;
+	
+	@Column(name="peso_total_item",nullable=false,precision=10, scale=3)
+	private BigDecimal pesoTotalItem;
+	
+	public ItemVenda() {}
+	
+	public ItemVenda(Vinho vinho, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal pesoVinho) {
+		this.vinho = vinho;
+		this.quantidade = quantidade;
+		this.valorUnitario = valorUnitario;
+		this.pesoVinho = pesoVinho;
+	}
 
 	public Vinho getVinho() {
 		return vinho;
@@ -84,8 +96,19 @@ public class ItemVenda extends BasicBean{
 		this.pesoVinho = pesoVinho;
 	}
 	
+	public BigDecimal getPesoTotalItem() {
+		return pesoTotalItem;
+	}
+	
+	public void setPesoTotalItem(BigDecimal pesoTotalItem) {
+		this.pesoTotalItem = pesoTotalItem;
+	}
+
 	@Override
 	public String toString() {
-		return getId()+" - "+vinho+" "+totalItem;
+		return "ItemVenda [vinho=" + vinho + ", venda=" + venda + ", quantidade=" + quantidade + ", valorUnitario="
+				+ valorUnitario + ", totalItem=" + totalItem + ", pesoVinho=" + pesoVinho + ", getId()=" + getId()
+				+ "]";
 	}
+	
 }
