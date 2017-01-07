@@ -37,7 +37,7 @@ public class BasicBeanResource<T extends BasicBean> {
 	public T save( T obj) {
 		System.out.println("SALVANDO "+obj);
 		if(obj.getId()>0){
-			Db.em().merge(obj);
+			obj = Db.em().merge(obj);
 		}else{
 			Db.em().persist(obj);
 		}

@@ -6,31 +6,140 @@
 </head>
 <body>
 
-  Back-end softvinho<br>
-  Para acessar algum recurso, adicione o path /api/nome_do_recurso <br>
-  <br><br>
-  Recursos disponíveis: <br>
-  /cliente<br>
-  /vinho<br>
-  /venda<br>
-  <br><br>
-  Operações:<br><br>
-  /save/{JSON}<br>
-  Retorno: JSON com id<br><br>
-  /delete/{num_id}<br>
-  Retorno:true ou false<br><br>
-  /get/{num_id}<br>
-  Retorno: JSON completo do objeto<br><br>
-  Nenhum recurso adicionado ao path: lista todoa em formato JSON<br>
-  <br>
-  <br>
-  Exemplo para listar todos os clientes:<br>
-  http://localhost:8080/softvinhows/api/cliente<br>
-  <br>
-  Exemplo para buscar o cliente de código 1:<br>
-  http://localhost:8080/softvinhows/api/cliente/get/1<br>  
-  <br>
-  Exemplo de JSON de cliente:<br>
-  ...
+	<h2>Back-end softvinho</h2>
+	Para acessar algum recurso, adicione o path:<br> 
+	<i>.../api/nome_do_recurso</i>
+  
+	<h3>Recursos disponíveis:</h3>
+	/cliente<br>
+	/vinho<br>
+	/venda<br>
+	
+	<h3>Operações:</h3>
+	<ul>
+		<li>
+		/save/{JSON} <br>
+		Caso o JSON enviado contenha o atributo "id", haverá uma tentativa de efetuar a alteração daquele objeto, 
+		do contrário (objeto com id inexistente ou não persistido no banco de dados), 
+		um novo objeto será inserido no banco de dados, recebendo o próximo id da sequência.<br>
+		Retorno: JSON com id<br><br>
+		</li>
+		<li>
+		/delete/{num_id} <br>
+		Retorno: true se conseguiu fazer o delete ou false<br><br>
+		</li>
+		<li>
+		/get/{num_id} <br>
+		Retorno: JSON completo do objeto. Se não encontrado, retorno nulo<br><br>
+		</li>
+		<li>
+		Nenhum recurso adicionado ao path: lista todos em formato JSON
+		</li>
+	</ul>
+
+	<h3>Exemplos</h3>
+	<h4>Listar todos os clientes:</h4>
+	http://localhost:8080/softvinhows/api/cliente
+  
+	<h4>Buscar o cliente de código 1:</h4>
+	http://localhost:8080/softvinhows/api/cliente/get/1  
+  
+	<h4>Exemplo completo de um JSON de cliente:</h4>
+	<i>{"id": 1,"nome": "Cliente teste"}</i>
+
+	<h4>Exemplo completo de um JSON de vinho:</h4>
+	<i>{<br>
+	"id": 1,<br>
+	"nome": "Vinho lambrusco anella tinto",<br>
+	"tipo": "TINTO",<br>
+	"peso": 0.575,<br>
+	"precoSugerido": 35<br>
+	}</i>
+	
+	<h4>Exemplo de um JSON para registro de uma nova venda(save):</h4>
+	Todos os campos desde JSON são obrigatórios para o registro de uma venda.<br> 
+	Caso falte alguma informação, o retorno será um ERRO 400 - Bad request
+	<pre>
+  {
+    "cliente":{
+    	"id":1
+    },
+    "distancia": 10,
+    "itens": [
+      {
+        "vinho": {
+          "id": 1
+        },
+        "quantidade": 1,
+        "valorUnitario": 50,
+        "pesoVinho":0.750
+      },
+      {
+        "vinho": {
+          "id": 2
+        },
+        "quantidade": 1,
+        "valorUnitario": 40,
+        "pesoVinho":0.575
+      }
+    ]
+  }
+	</pre>
+	
+	<h4>Exemplo completo de um JSON de venda :</h4>
+	Venda já persistida no banco de dados, com os totais calculados automaticamente pelo método save<br>
+	<pre>
+  {
+    "id": 1,
+    "cliente": {
+      "id": 1,
+      "nome": "Cliente teste 1"
+    },
+    "data": "2017-01-06",
+    "distancia": 10,
+    "pesoTotal": 1.325,
+    "totalItens": 90,
+    "totalFrete": 6.62,
+    "totalGeral": 96.62,
+    "itens": [
+      {
+        "id": 1,
+        "vinho": {
+          "id": 1,
+          "nome": "Vinho lambrusco anella tinto",
+          "tipo": "TINTO",
+          "peso": 0.575,
+          "precoSugerido": 35
+        },
+        "quantidade": 1,
+        "valorUnitario": 50,
+        "totalItem": 50,
+        "pesoVinho": 0.75,
+        "pesoTotalItem": 0.75
+      },
+      {
+        "id": 2,
+        "vinho": {
+          "id": 2,
+          "nome": "Henri Jayer Richebourg Grand Cru",
+          "tipo": "TINTO",
+          "peso": 0.75,
+          "precoSugerido": 750.25
+        },
+        "quantidade": 1,
+        "valorUnitario": 40,
+        "totalItem": 40,
+        "pesoVinho": 0.575,
+        "pesoTotalItem": 0.575
+      }
+    ]
+  }
+	</pre>
+
+	<h4>Recurso extra: Calcular frete de uma venda</h4>
+	Path: .../api/venda/{distancia_km}/{peso_kg}<br><br>
+	Exemplo para distância de 110km e peso de 4,125kg:<br><br>
+	<i>http://localhost:8080/softvinhows/api/venda/calcular_frete/110/4.125</i><br><br>
+	Retorno: 22.68
 </body>
 </html>
