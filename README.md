@@ -12,12 +12,12 @@ Requisitos do banco de dados(PostgreSQL 9.5):
   - nome do banco: softvinho
   - schema: teste
   - usuário: softvinho
-  - senha: 123
+  - senha: 123<br>
   (tabelas geradas automaticamente no deploy da aplicação)
   
 Compilação (maven): 
   - mvn clean package
   - arquivo gerado para deploy: target/softvinhows.war
   
-Documentação da api em: http://url:porta/softvinhows
-Exemplo: http://localhost:8080/softvinhows/
+Documentação da api em: http://url:porta/softvinhows<br>
+Exemplo: http://localhost:8080/softvinhows/<br>
