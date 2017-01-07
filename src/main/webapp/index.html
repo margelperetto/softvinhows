@@ -5,7 +5,32 @@
 <title>SoftVinho!</title>
 </head>
 <body>
-Nenhum recurso disponível aqui...<br>
-Para acessar algum recurso, adicione o path /api/nome_do_recurso
+
+  Back-end softvinho<br>
+  Para acessar algum recurso, adicione o path /api/nome_do_recurso <br>
+  <br><br>
+  Recursos disponíveis: <br>
+  /cliente<br>
+  /vinho<br>
+  /venda<br>
+  <br><br>
+  Operações:<br><br>
+  /save/{JSON}<br>
+  Retorno: JSON com id<br><br>
+  /delete/{num_id}<br>
+  Retorno:true ou false<br><br>
+  /get/{num_id}<br>
+  Retorno: JSON completo do objeto<br><br>
+  Nenhum recurso adicionado ao path: lista todoa em formato JSON<br>
+  <br>
+  <br>
+  Exemplo para listar todos os clientes:<br>
+  http://localhost:8080/softvinhows/api/cliente<br>
+  <br>
+  Exemplo para buscar o cliente de código 1:<br>
+  http://localhost:8080/softvinhows/api/cliente/get/1<br>  
+  <br>
+  Exemplo de JSON de cliente:<br>
+  ...
 </body>
 </html>
