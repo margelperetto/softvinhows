@@ -1,10 +1,9 @@
 package br.com.margel.softvinhows;
 
+import java.text.SimpleDateFormat;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 @SuppressWarnings("serial")
 @Provider
@@ -12,9 +11,13 @@ public class JSONFormattter extends ObjectMapper implements ContextResolver<Obje
 
 	private final ObjectMapper mapper;
 	
+	private SimpleDateFormat formatter = 
+		      new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	
+	
 	public JSONFormattter() {
 		mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		mapper.setDateFormat(formatter);
 	}
 	
 	@Override

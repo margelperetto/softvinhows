@@ -1,7 +1,7 @@
 package br.com.margel.softvinhows.models;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +16,8 @@ public class Venda extends BasicBean{
 	@ManyToOne(optional=false)
 	private Cliente cliente;
 	
-	@Column
-	private Date data;
+	@Column(name="data_venda")
+	private Timestamp dataVenda;
 	
 	@Column
 	private BigDecimal distancia;
@@ -52,14 +52,6 @@ public class Venda extends BasicBean{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public BigDecimal getDistancia() {
@@ -109,12 +101,20 @@ public class Venda extends BasicBean{
 	public void setPesoTotal(BigDecimal pesoTotal) {
 		this.pesoTotal = pesoTotal;
 	}
+	
+	public Timestamp getDataVenda() {
+		return dataVenda;
+	}
+
+	public void setDataVenda(Timestamp dataVenda) {
+		this.dataVenda = dataVenda;
+	}
 
 	@Override
 	public String toString() {
-		return "Venda [cliente=" + cliente + ", data=" + data + ", distancia=" + distancia + ", pesoTotal=" + pesoTotal
+		return "Venda [cliente=" + cliente + ", dataVenda=" + dataVenda + ", distancia=" + distancia + ", pesoTotal=" + pesoTotal
 				+ ", totalItens=" + totalItens + ", totalFrete=" + totalFrete + ", totalGeral=" + totalGeral
-				+ ", itens=" + itens + ", getId()=" + getId() + "]";
+				+ ", getId()=" + getId() + "]";
 	}
-	
+
 }

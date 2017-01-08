@@ -3,6 +3,8 @@ package br.com.margel.softvinhows;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -98,7 +100,10 @@ public class TestVenda extends GrizzlyTest{
 	}
 	
 	private void assertVendaTesteTotaisVendaTotaisItens(Venda v, long id){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
 		assertEquals(id, v.getId());
+		assertEquals(sdf.format(new Date(System.currentTimeMillis())), sdf.format(v.getDataVenda()));
 		
 		assertEquals(2, v.getItens().size());
 		

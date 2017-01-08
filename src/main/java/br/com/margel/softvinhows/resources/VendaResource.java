@@ -2,7 +2,7 @@ package br.com.margel.softvinhows.resources;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -103,7 +103,7 @@ public class VendaResource extends BasicBeanResource<Venda>{
 		if(v.getTotalFrete()==null){
 			v.setTotalFrete(calcularTotalFrete(v.getDistancia(), pesoTotal));
 		}
-		v.setData(new Date(System.currentTimeMillis()));
+		v.setDataVenda(new Timestamp(System.currentTimeMillis()));
 		v.setPesoTotal(pesoTotal);
 		v.setTotalItens(totalItens);
 		v.setTotalGeral(totalItens.add(v.getTotalFrete()));
