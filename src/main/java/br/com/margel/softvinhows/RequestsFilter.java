@@ -1,6 +1,7 @@
 package br.com.margel.softvinhows;
 
 import java.io.IOException;
+import javax.persistence.PersistenceException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -9,6 +10,8 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+
+import org.hibernate.exception.ConstraintViolationException;
 
 @Provider
 public class RequestsFilter implements ContainerRequestFilter,ContainerResponseFilter, ExceptionMapper<Throwable>{
@@ -31,7 +34,19 @@ public class RequestsFilter implements ContainerRequestFilter,ContainerResponseF
 		Response resp;
 		if(exception instanceof WebApplicationException){
 			resp = ((WebApplicationException)exception).getResponse();
+		}else if(exception instanceof PersistenceException){
+			System.out.println("ERRO DE PERSISTÊNCIA!");
+			ConstraintViolationException cve = findIntegrityException(exception);
+			if(cve!=null){
+				resp = Response.status(Response.Status.CONFLICT)
+						.build();
+			}else{
+				System.out.println("ConstraintViolationException NÃO ENCONTRADA!");
+				exception.printStackTrace();
+				resp = Response.status(422).build();
+			}
 		}else{ 
+			System.out.println("ERRO INESPERADO!");
 			if(exception!=null){
 				exception.printStackTrace();
 			}
@@ -40,6 +55,16 @@ public class RequestsFilter implements ContainerRequestFilter,ContainerResponseF
 		}
 		Db.rollback();
 		return resp;
+	}
+	
+	public ConstraintViolationException findIntegrityException(Throwable e){
+		if(e == null){
+			return null;
+		}
+		if(e instanceof ConstraintViolationException){
+			return (ConstraintViolationException)e;
+		}
+		return findIntegrityException(e.getCause());
 	}
 
 }

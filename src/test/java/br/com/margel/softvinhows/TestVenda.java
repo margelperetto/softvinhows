@@ -156,13 +156,13 @@ public class TestVenda extends GrizzlyTest{
 	private Cliente saveClienteTeste(){
 		return target.path("cliente/save")
 				.request()
-				.put(Entity.json(new Cliente("Cliente teste")),Cliente.class);
+				.put(Entity.json(new Cliente("Cliente teste "+System.nanoTime())),Cliente.class);
 	}
 
 	private Vinho saveVinhoTeste(){
 		
 		Vinho vinho = new Vinho(
-				"Vinho teste", //nome
+				"Vinho teste "+System.nanoTime(), //nome
 				new BigDecimal("0.375"),//peso 
 				new BigDecimal("9.99"), //valor sugerido
 				Tipo.TINTO //tipo

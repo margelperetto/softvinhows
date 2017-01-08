@@ -12,13 +12,13 @@ import javax.persistence.Table;
 @Table(name="vinhos")
 public class Vinho extends BasicBean{
 
-	@Column(nullable=false)
+	@Column(nullable=false,unique=true)
 	private String nome;
 	
 	@Enumerated(EnumType.STRING)
 	private Tipo tipo;
 	
-	@Column(nullable=false,precision=10, scale=3)
+	@Column(precision=10, scale=3)
 	private BigDecimal peso;
 	
 	@Column(name="preco_sugerido")

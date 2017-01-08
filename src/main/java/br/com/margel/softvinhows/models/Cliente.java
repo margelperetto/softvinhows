@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table(name="clientes")
 public class Cliente extends BasicBean{
 
-	@Column(nullable=false)
+	@Column(nullable=false,unique=true)
 	private String nome;
 	
 	public Cliente() {

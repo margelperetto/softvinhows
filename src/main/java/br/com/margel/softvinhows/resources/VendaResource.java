@@ -12,8 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import br.com.margel.softvinhows.Db;
 import br.com.margel.softvinhows.models.ItemVenda;
@@ -28,8 +26,6 @@ public class VendaResource extends BasicBeanResource<Venda>{
 	
 	@Override
 	public Venda save(Venda obj) {
-		
-		validarVendaCalcularTotais(obj);
 		
 		Venda venda = super.save(obj);
 
@@ -85,13 +81,14 @@ public class VendaResource extends BasicBeanResource<Venda>{
 		System.out.println("Calculando frete para distância: "+distancia+" e peso "+peso);
 		return calcularTotalFrete(distancia, peso);
 	}
-
-	public void validarVendaCalcularTotais(Venda v){
+	
+	@Override
+	protected void validarSave(Venda v) throws WebApplicationException {
 		if(v.getCliente()==null || v.getCliente().getId()==0){
-			throw badRequest("Cliente inválido ou não adicionado na venda! "+v.getCliente());
+			throw builBadRequest("Cliente inválido ou não adicionado na venda! "+v.getCliente());
 		}
 		if(v.getItens()==null || v.getItens().isEmpty()){
-			throw badRequest("Nenhum item adicionado na venda!");
+			throw builBadRequest("Nenhum item adicionado na venda!");
 		}
 		BigDecimal totalItens = BigDecimal.ZERO;
 		BigDecimal pesoTotal = BigDecimal.ZERO;
@@ -108,19 +105,19 @@ public class VendaResource extends BasicBeanResource<Venda>{
 		v.setTotalItens(totalItens);
 		v.setTotalGeral(totalItens.add(v.getTotalFrete()));
 	}
-	
-	public void validarItemCalcularTotal(ItemVenda i) {
+
+	private void validarItemCalcularTotal(ItemVenda i) {
 		if(i.getVinho()==null){
-			throw badRequest("Nenhum vinho informado para o item de venda! Qtd.: "+i.getQuantidade()+" x Vl.: "+i.getValorUnitario());
+			throw builBadRequest("Nenhum vinho informado para o item de venda! Qtd.: "+i.getQuantidade()+" x Vl.: "+i.getValorUnitario());
 		}
 		if(i.getPesoVinho()==null || i.getPesoVinho().signum()==0){
-			throw badRequest("Peso do vinho '"+i.getVinho()+"' não informado!");
+			throw builBadRequest("Peso do vinho '"+i.getVinho()+"' não informado!");
 		}
 		if(i.getQuantidade()==null || i.getQuantidade().signum()==0){
-			throw badRequest("Nenhuma quantidade informada para o vinho '"+i.getVinho()+"' !");
+			throw builBadRequest("Nenhuma quantidade informada para o vinho '"+i.getVinho()+"' !");
 		}
 		if(i.getValorUnitario()==null || i.getValorUnitario().signum()==0){
-			throw badRequest("Valor unitário não informado para o vinho '"+i.getVinho()+"' !");
+			throw builBadRequest("Valor unitário não informado para o vinho '"+i.getVinho()+"' !");
 		}
 		i.setTotalItem(i.getQuantidade().multiply(i.getValorUnitario()));
 		i.setPesoTotalItem(i.getQuantidade().multiply(i.getPesoVinho()));
@@ -137,10 +134,10 @@ public class VendaResource extends BasicBeanResource<Venda>{
 	public static BigDecimal calcularTotalFrete(BigDecimal distancia, BigDecimal peso) {
 		
 		if(distancia == null || distancia.signum()<0){
-			throw badRequest("Distância '"+distancia+"' inválida ou não informada para calcular frete!");
+			throw builBadRequest("Distância '"+distancia+"' inválida ou não informada para calcular frete!");
 		}
 		if(peso == null || peso.signum()<=0){
-			throw badRequest("Peso '"+peso+"' inválido ou não informado para calcular frete!");
+			throw builBadRequest("Peso '"+peso+"' inválido ou não informado para calcular frete!");
 		}
 		if(distancia.signum()==0){
 			return BigDecimal.ZERO;
@@ -154,9 +151,5 @@ public class VendaResource extends BasicBeanResource<Venda>{
 			}
 		}
 	}
-	
-	private static WebApplicationException badRequest(String msg){
-		return new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(msg).build());
-	}
-	
+
 }

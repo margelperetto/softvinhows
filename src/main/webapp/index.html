@@ -43,19 +43,32 @@
   
 	<h4>Buscar o cliente de código 1:</h4>
 	http://localhost:8080/softvinhows/api/cliente/get/1  
+	
+	<h4>Excluir o cliente de código 1:</h4>
+	http://localhost:8080/softvinhows/api/cliente/delete/1  
+
+	<h4>Salvar um cliente (envio de um JSON):</h4>
+	<i>http://localhost:8080/softvinhows/api/cliente/save</i>
   
 	<h4>Exemplo completo de um JSON de cliente:</h4>
-	<i>{"id": 1,"nome": "Cliente teste"}</i>
-
+	Não é permitido salvar dois clientes com o mesmo nome, retornará um 409 - Conflict
+	<pre>
+  {
+    "id": 1, 
+    "nome": "Cliente teste"
+  }
+	</pre>
 	<h4>Exemplo completo de um JSON de vinho:</h4>
-	<i>{<br>
-	"id": 1,<br>
-	"nome": "Vinho lambrusco anella tinto",<br>
-	"tipo": "TINTO",<br>
-	"peso": 0.575,<br>
-	"precoSugerido": 35<br>
-	}</i>
-	
+	Não é permitido salvar dois vinhos com o mesmo nome, retornará um 409 - Conflict
+	<pre>
+  {
+    "id": 1,
+    "nome": "Vinho lambrusco anella tinto",
+    "tipo": "TINTO",
+    "peso": 0.575,
+    "precoSugerido": 35
+  }
+	</pre>
 	<h4>Exemplo de um JSON para registro de uma nova venda(save):</h4>
 	Todos os campos desde JSON são obrigatórios para o registro de uma venda.<br> 
 	Caso falte alguma informação, o retorno será um ERRO 400 - Bad request
@@ -72,7 +85,7 @@
         },
         "quantidade": 1,
         "valorUnitario": 50,
-        "pesoVinho":0.750
+        "pesoVinho":0.575
       },
       {
         "vinho": {
@@ -80,7 +93,7 @@
         },
         "quantidade": 1,
         "valorUnitario": 40,
-        "pesoVinho":0.575
+        "pesoVinho":0.750
       }
     ]
   }
@@ -95,7 +108,7 @@
       "id": 1,
       "nome": "Cliente teste 1"
     },
-    "data": "2017-01-06",
+    "dataVenda": "2017-01-08T15:51:24.146-0200",
     "distancia": 10,
     "pesoTotal": 1.325,
     "totalItens": 90,
@@ -109,13 +122,13 @@
           "nome": "Vinho lambrusco anella tinto",
           "tipo": "TINTO",
           "peso": 0.575,
-          "precoSugerido": 35
+          "precoSugerido": 55
         },
         "quantidade": 1,
         "valorUnitario": 50,
         "totalItem": 50,
-        "pesoVinho": 0.75,
-        "pesoTotalItem": 0.75
+        "pesoVinho": 0.575,
+        "pesoTotalItem": 0.575
       },
       {
         "id": 2,
@@ -124,13 +137,13 @@
           "nome": "Henri Jayer Richebourg Grand Cru",
           "tipo": "TINTO",
           "peso": 0.75,
-          "precoSugerido": 750.25
+          "precoSugerido": 40
         },
         "quantidade": 1,
         "valorUnitario": 40,
         "totalItem": 40,
-        "pesoVinho": 0.575,
-        "pesoTotalItem": 0.575
+        "pesoVinho": 0.75,
+        "pesoTotalItem": 0.75
       }
     ]
   }

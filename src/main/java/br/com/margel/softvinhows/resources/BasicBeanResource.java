@@ -13,12 +13,15 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.com.margel.softvinhows.Db;
 import br.com.margel.softvinhows.models.BasicBean;
 
-public class BasicBeanResource<T extends BasicBean> {
+public abstract class BasicBeanResource<T extends BasicBean> {
 	
 	private Class<T> clazz;
 	
@@ -36,6 +39,7 @@ public class BasicBeanResource<T extends BasicBean> {
 	@Path("save")
 	public T save( T obj) {
 		System.out.println("SALVANDO "+obj);
+		validarSave(obj);
 		if(obj.getId()>0){
 			obj = Db.em().merge(obj);
 		}else{
@@ -44,6 +48,8 @@ public class BasicBeanResource<T extends BasicBean> {
 		return obj;
 	}
 	
+	protected abstract void validarSave(T obj) throws WebApplicationException;
+
 	@DELETE
 	@Path("delete/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -79,6 +85,10 @@ public class BasicBeanResource<T extends BasicBean> {
 
 		List<T> list = typed.getResultList();
 		return list;
+	}
+	
+	protected static WebApplicationException builBadRequest(String msg){
+		return new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(msg).build());
 	}
 
 }

@@ -6,7 +6,8 @@ Controle de dependências: Maven <br>
 Banco de dados utilizado: PostgreSQL 9.5 <br>
 servlet container: Apache Tomcat 8 <br>
 JPA: Hibernate <br>
-Testes unitários: JUnit<br>
+Testes unitários: JUnit <br>
+JDK: Oracle Java 8 <br>
 
 Requisitos do banco de dados(PostgreSQL 9.5): 
   - nome do banco: softvinho

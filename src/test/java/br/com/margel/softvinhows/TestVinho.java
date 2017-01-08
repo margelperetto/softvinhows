@@ -13,9 +13,9 @@ import br.com.margel.softvinhows.models.Vinho.Tipo;
 public class TestVinho extends AbstractBasicBeanTest<Vinho>{
 
 	@Override
-	protected Vinho createTestInstanceWithoutId(int seq) {
+	protected Vinho createTestInstanceWithoutId(long unique) {
 		return new Vinho(
-				"Vinho teste "+seq, 
+				"Vinho teste "+unique, 
 				new BigDecimal("0.575"), 
 				new BigDecimal("45.99"), 
 				Tipo.TINTO

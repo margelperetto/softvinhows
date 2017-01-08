@@ -9,7 +9,7 @@ import br.com.margel.softvinhows.models.BasicBean;
 
 public abstract class AbstractBasicBeanTest<T extends BasicBean> extends GrizzlyTest{
 	
-	protected abstract T createTestInstanceWithoutId(int seq);
+	protected abstract T createTestInstanceWithoutId(long unique);
 	
 	protected abstract void executeAllAssertsExceptId(T obj, T other);
 	
@@ -19,11 +19,15 @@ public abstract class AbstractBasicBeanTest<T extends BasicBean> extends Grizzly
 	
 	protected abstract String path();
 	
+	private T createUnique(){
+		return createTestInstanceWithoutId(System.nanoTime());
+	}
+	
 	@Test
 	public void testAdd() {
 		System.out.println("TESTANDO ADD DE "+path());
 
-		T testInstance = createTestInstanceWithoutId(1);
+		T testInstance = createUnique();
 		
 		T resposta = save(testInstance);
 
@@ -37,14 +41,14 @@ public abstract class AbstractBasicBeanTest<T extends BasicBean> extends Grizzly
 	public void testUpdate() {
 		System.out.println("TESTANDO UPDATE DE "+path());
 
-		T testInstance = createTestInstanceWithoutId(1);
+		T testInstance = createUnique();
 		
 		T respSave = save(testInstance);
 
 		assertEquals(respSave.getId(), 1);
 		executeAllAssertsExceptId(testInstance, respSave);
 
-		T objAlterado = createTestInstanceWithoutId(2);
+		T objAlterado = createUnique();
 		objAlterado.setId(respSave.getId());
 
 		T respUpdate = save(objAlterado);
@@ -64,7 +68,7 @@ public abstract class AbstractBasicBeanTest<T extends BasicBean> extends Grizzly
 	public void testDelete() {
 		System.out.println("TESTANDO DELETE DE "+path());
 
-		T testInstance = createTestInstanceWithoutId(1);
+		T testInstance = createUnique();
 		
 		T respSave = save(testInstance);
 
@@ -82,7 +86,7 @@ public abstract class AbstractBasicBeanTest<T extends BasicBean> extends Grizzly
 	public void testGet() {
 		System.out.println("TESTANDO GET DE "+path());
 		
-		T testInstance = createTestInstanceWithoutId(1);
+		T testInstance = createUnique();
 
 		T respSave = save(testInstance);
 
@@ -100,8 +104,8 @@ public abstract class AbstractBasicBeanTest<T extends BasicBean> extends Grizzly
 	public void testList() {
 		System.out.println("TESTANDO LIST DE "+path());
 
-		T saved1 = save(createTestInstanceWithoutId(1));
-		T saved2 = save(createTestInstanceWithoutId(2));
+		T saved1 = save(createUnique());
+		T saved2 = save(createUnique());
 
 		List<T> retList = target.path(path())
 				.request()

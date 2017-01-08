@@ -10,8 +10,8 @@ import br.com.margel.softvinhows.models.Cliente;
 
 public class TestCliente extends AbstractBasicBeanTest<Cliente>{
 	
-	protected Cliente createTestInstanceWithoutId(int seq){
-		return new Cliente("Cliente teste "+seq);
+	protected Cliente createTestInstanceWithoutId(long unique){
+		return new Cliente("Cliente teste "+unique);
 	}
 	
 	protected void executeAllAssertsExceptId(Cliente obj, Cliente other){
