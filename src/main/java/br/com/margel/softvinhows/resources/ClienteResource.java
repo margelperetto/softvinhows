@@ -14,7 +14,7 @@ public class ClienteResource extends BasicBeanResource<Cliente> {
 
 	@Override
 	protected void validarSave(Cliente obj) throws WebApplicationException {
-		if(obj.getNome()==null || obj.getNome().isEmpty()){
+		if(obj.getNome()==null || obj.getNome().trim().isEmpty()){
 			throw builBadRequest("Nome não informado para o cliente! "+obj);
 		}
 	}

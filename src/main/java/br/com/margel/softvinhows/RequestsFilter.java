@@ -26,6 +26,11 @@ public class RequestsFilter implements ContainerRequestFilter,ContainerResponseF
 		Db.commit();
 		Db.closeEm();
 		System.out.println("FINALIZANDO REQUISIÇÃO...\n");
+		
+		responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+		responseContext.getHeaders().add("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS, PATCH");
+		responseContext.getHeaders().add("Access-Control-Allow-Headers", "Content-Type, Accept, token, api_key, Authorization, Origin, X-Requested-With");
+		responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
 	}
 
 	@Override

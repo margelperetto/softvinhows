@@ -13,7 +13,7 @@ public class VinhoResource extends BasicBeanResource<Vinho> {
 	
 	@Override
 	protected void validarSave(Vinho obj) throws WebApplicationException {
-		if(obj.getNome()==null || obj.getNome().isEmpty()){
+		if(obj.getNome()==null || obj.getNome().trim().isEmpty()){
 			throw builBadRequest("Nome não informado para o vinho! "+obj);
 		}
 	}
