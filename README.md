@@ -22,7 +22,7 @@ Compilação (maven):
   
 Documentação da api em: http://url:porta/softvinhows<br>
 Exemplo: http://localhost:8080/softvinhows/<br>
-<br><br
+<br><br>
 Ou ainda online em: <br>
 http://cloud.2me.net.br/softvinhows/
 <br><br>
