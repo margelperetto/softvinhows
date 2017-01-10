@@ -18,22 +18,22 @@
 	<h3>Operações:</h3>
 	<ul>
 		<li>
-		/save/{JSON} <br>
+		/save/{JSON} <i>HTTP PUT</i><br>
 		Caso o JSON enviado contenha o atributo "id", haverá uma tentativa de efetuar a alteração daquele objeto, 
 		do contrário (objeto com id inexistente ou não persistido no banco de dados), 
 		um novo objeto será inserido no banco de dados, recebendo o próximo id da sequência.<br>
 		Retorno: JSON com id<br><br>
 		</li>
 		<li>
-		/delete/{num_id} <br>
+		/delete/{num_id} <i>HTTP DELETE</i><br>
 		Retorno: true se conseguiu fazer o delete ou false<br><br>
 		</li>
 		<li>
-		/get/{num_id} <br>
+		/get/{num_id} <i>HTTP GET</i><br>
 		Retorno: JSON completo do objeto. Se não encontrado, retorno nulo<br><br>
 		</li>
 		<li>
-		Nenhum recurso adicionado ao path: lista todos em formato JSON
+		Nenhum recurso adicionado ao path: lista todos em formato JSON <i>HTTP GET</i>
 		</li>
 	</ul>
 
