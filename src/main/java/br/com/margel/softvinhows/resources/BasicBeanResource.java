@@ -88,7 +88,8 @@ public abstract class BasicBeanResource<T extends BasicBean> {
 	}
 	
 	protected static WebApplicationException builBadRequest(String msg){
-		return new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(msg).build());
+		return new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(msg)
+				.type(MediaType.TEXT_PLAIN).build());
 	}
 
 }
