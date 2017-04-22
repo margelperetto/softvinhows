@@ -34,5 +34,5 @@ Exemplo: http://localhost:8080/softvinhows/<br>
 Ou ainda online em: <br>
 http://cloud.2me.net.br/softvinhows/
 <br><br>
-Também é possível acessar um front-end JavaScrip que acessa esta api em: <br>
+Também é possível acessar um front-end JavaScript que acessa esta api em: <br>
 http://cloud.2me.net.br/softvinho/
